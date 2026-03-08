@@ -1,4 +1,4 @@
-# Project Name
+# A-Method-for-Synthesizing-Rail-Fastener-Images-for-the-Evaluation-of-Track-Vision-Inspection-Systems
 
 Official PyTorch implementation of **A-Method-for-Synthesizing-Rail-Fastener-Images-for-the-Evaluation-of-Track-Vision-Inspection-Systems
 **.
@@ -46,7 +46,7 @@ pip install -r requirements.txt
 
 # Pretrained Models
 
-Download the pretrained checkpoint and place it in:
+Download the pretrained checkpoint from https://pan.quark.cn/s/6dbbd3b8358d?pwd=Yq3A and place it in:
 
     inference/ckpts/
 
