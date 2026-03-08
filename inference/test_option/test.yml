@@ -1,0 +1,60 @@
+name: test
+suffix: ~  
+model: latent_denoising
+gpu_ids: [6]
+
+sde:
+  max_sigma: 50
+  T: 100
+  sample_T: 100
+  schedule: cosine # linear, cosine
+  eps: 0.005
+  
+degradation:
+  # for denoising
+  sigma: 25
+  noise_type: G # Gaussian noise: G
+
+  # for super-resolution
+  scale: 1
+#~
+datasets:
+  test1:
+    name: test
+    mode: LQGTMA
+    dataroot_LQ: ~
+    dataroot_MA: ~
+    dataroot_GT: ~
+#### network structures
+network_G:
+  which_model: ConditionalNAFNet
+  setting:
+    img_channel: 8
+    width: 64
+    enc_blk_nums: [1, 1, 1, 28]
+    middle_blk_num: 1
+    dec_blk_nums: [1, 1, 1, 1]
+
+network_G_recons:
+  which_model: ConditionalNAFNet_recons
+  setting:
+    img_channel: 8
+    width: 64
+    enc_blk_nums: [1, 1, 1, 28]
+    middle_blk_num: 1
+    dec_blk_nums: [1, 1, 1, 1]
+
+network_L:
+  which_model: UNet
+  setting:
+    in_ch: 3
+    out_ch: 3
+    ch: 8
+    ch_mult: [4, 8, 8, 16]
+    embed_dim: 8
+
+#### path
+path:
+  pretrain_model_G: ckpts/latest.pth
+  pretrain_model_L: ckpts/latent.pth
+  pretrain_model_G_recons: ckpts/recon.pth
